@@ -1,7 +1,5 @@
 runtime: python39
 
-entrypoint: gunicorn -b :$PORT app:app
-
 env_variables:
   CLOUD_SQL_USERNAME: mastershoe
   CLOUD_SQL_PASSWORD: shoe
