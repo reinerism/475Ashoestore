@@ -1,0 +1,12 @@
+runtime: python39
+
+env_variables:
+  MYSQL_USER: mastershoe
+  MYSQL_PASSWORD: shoe
+  MYSQL_DATABASE: shoe_store
+  CLOUD_SQL_CONNECTION_NAME: css475aw23shoestore:us-west1:cloud-shoe-store-sql
+
+handlers:
+- url: /
+  static_files: templates/index.html
+  upload: templates/index.html
