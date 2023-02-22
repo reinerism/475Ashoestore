@@ -1,43 +1,45 @@
-from flask import Flask, render_template, request
-import os
+from flask import Flask
 import mysql.connector
+import os
 
-# Get database connection details from environment variables
-db_user = os.environ['MYSQL_USER']
-db_password = os.environ['MYSQL_PASSWORD']
-db_name = os.environ['MYSQL_DATABASE']
-cloud_sql_connection_name = os.environ['CLOUD_SQL_CONNECTION_NAME']
 
-# Create a connection object to the Cloud SQL database
-cnx = mysql.connector.connect(user=db_user, password=db_password,
-                              database=db_name, unix_socket="/cloudsql/{}".format(cloud_sql_connection_name))
 
-# Create a Flask app object
+#creatin an instance of flask
 app = Flask(__name__)
 
-# Define a route for the homepage
+db_user = os.environ.get('CLOUD_SQL_USERNAME'),
+db_password = os.environ.get('CLOUD_SQL_PASSWORD'),
+db_name = os.environ.get('CLOUD_SQL_DATABASE_NAME'),
+db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME'),
+
+
+#define route displays query 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    # When deployed to App Engine, the `GAE_ENV` environment variable will be
+    # set to `standard`
+    if os.environ.get('GAE_ENV') == 'standard':
+        # If deployed, use the local socket interface for accessing Cloud SQL
+        unix_socket = '/cloudsql/{}'.format(db_connection_name)
+        cnx = mysql.connector.connect(user=db_user, password=db_password,
+                              unix_socket=unix_socket, db=db_name)
+    else:
+        # If running locally, use the TCP connections instead
+        # Set up Cloud SQL Proxy (cloud.google.com/sql/docs/mysql/sql-proxy)
+        # so that your application can use 127.0.0.1:3306 to connect to your
+        # Cloud SQL instance
+        host = '127.0.0.1'
+        cnx = mysql.connector.connect(user=db_user, password=db_password,
+                              host=host, db=db_name)
 
-# Define a route for executing SQL queries
-@app.route('/query', methods=['POST'])
-def query():
-    # Get the query string from the form submission
-    query_string = request.form['query']
-    # Create a cursor object for executing SQL queries
-    cursor = cnx.cursor()
-    # Execute the query
-    cursor.execute(query_string)
-    # Fetch the results
-    results = cursor.fetchall()
-    # Get the column names
-    column_names = [i[0] for i in cursor.description]
-    # Close the cursor
-    cursor.close()
-    # Render the results template with the query results and column names
-    return render_template('results.html', results=results, column_names=column_names)
+    with cnx.cursor() as cursor:
+        cursor.execute('SELECT * FROM SHOE;')
+        result = cursor.fetchall()
+        current_msg = result[0][0]
+    cnx.close()
 
-# Run the app
-if __name__ == '__main__':
-    app.run(debug=True)
+    return str(current_msg)
+
+
+if __name__ == "__main__":
+        app.run(host='127.0.0.1', port=8080, debug=True)
