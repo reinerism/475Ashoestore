@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome To The Shoe Store</title>
+    <style>
+		footer {
+			margin-top: 50px;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			background-color: #f2f2f2;
+			text-align: center;
+			font-size: 14px;
+			line-height: 1.2;
+		}
+	</style>
+</head>
+<body>
+
+	<main>
+		<h1>Shoe Store Menu</h1>
+		<p>Type a command:</p>
+		<input type="text" id="command-input" />
+		<button onclick="executeCommand()">Execute</button>
+		<p id="output"></p>
+	</main>
+
+	<script>
+		function executeCommand() {
+			var input = document.getElementById("command-input").value;
+			var output = document.getElementById("output");
+			output.innerHTML = "You entered: " + input;
+		}
+	</script>
+
+	<footer>
+		<p>Copyright © 2023</p>
+        <p>Page created by Reiner Opitz</p>
+        <p>For educational purposes only</p>
+        <p>Testing Shoe Store Database</p>
+	</footer>
+
+</body>
+</html>
