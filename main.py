@@ -21,7 +21,7 @@ def index():
     return render_template('index.html')
 
 # Define a route for executing SQL queries
-@app.route('/query', methods=['POST'])
+@app.route('/', methods=['POST'])
 def query():
     # Get the query string from the form submission
     query_string = request.form['query']
