@@ -12,12 +12,19 @@
 			font-size: 14px;
 			line-height: 1.2;
 		}
+	    	.error-message {
+			color: red;
+			margin-bottom: 10px;
+		}	
 	</style>
 </head>
 <body>
 
 	<main>
 		<h1>Shoe Store Menu</h1>
+		{% if error %}
+			<div class="error-message">{{ error }}</div>
+		{% endif %}
 		<form action="/" method="post">
 			<label for="query-input">Enter a query:</label>
 			<input type="text" id="query-input" name="query" />
