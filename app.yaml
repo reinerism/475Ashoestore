@@ -1,19 +1,9 @@
+# [START gae_python39_cloudsql_config]
 runtime: python39
 
-entrypoint: gunicorn -b :$PORT main:app
-
 env_variables:
-  MYSQL_USER: mastershoe
-  MYSQL_PASSWORD: shoe
-  MYSQL_DATABASE: shoe_store
-  CLOUD_SQL_CONNECTION_NAME: css475aw23shoestore:us-west1:cloud-shoe-store-sql
-
-handlers:
-- url: /.*
-  script: auto
-- url: /static
-  static_dir: static
-  expiration: "1d"
-
-vpc_access_connector:
-  name: projects/css475aw23shoestore/locations/us-west1/connectors/shoestoreconnector
+  CLOUD_SQL_USERNAME: mastershoe
+  CLOUD_SQL_PASSWORD: shoe
+  CLOUD_SQL_DATABASE_NAME: shoestore
+  CLOUD_SQL_CONNECTION_NAME: shoestore-378821:us-west1:shoestore
+# [END gae_python39_cloudsql_config]
