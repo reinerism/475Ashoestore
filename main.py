@@ -25,6 +25,14 @@ db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
 
 app = Flask(__name__)
 
+def get_query(cnx):
+    with cnx.cursor() as cursor:
+        cursor.execute('select temp_txt from temp_tbl;')
+        result = cursor.fetchall()
+        current_msg = result[0][0]  
+        return current_msg 
+
+
 @app.route('/')
 def main():
 
@@ -43,10 +51,8 @@ def main():
         host = '127.0.0.1'
         cnx =  pymysql.connect(user=db_user, password=db_password,
                                 host=host, db=db_name)
-    with cnx.cursor() as cursor:
-        cursor.execute('YOUR QUERY GOES HERE;')
-        result = cursor.fetchall()
-        current_msg = result[0][0]   
+
+    current_msg = get_query(cnx)  
     
     cnx.close()
 
