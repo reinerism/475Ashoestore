@@ -6,11 +6,11 @@ import pymysql
 db_user = os.environ['MYSQL_USER']
 db_password = os.environ['MYSQL_PASSWORD']
 db_name = os.environ['MYSQL_DATABASE']
-cloud_sql_connection_name = os.environ['CLOUD_SQL_CONNECTION_NAME']
+
 
 # Create a connection object to the Cloud SQL database
-cnx = pymysql.connect(host= 10.44.160.4, user=db_user, password=db_password,
-                              database=db_name, unix_socket="/cloudsql/{}".format(cloud_sql_connection_name))
+cnx = pymysql.connect(host='10.44.160.4', user=db_user, password=db_password,
+                              database=db_name)
 
 # Create a Flask app object
 app = Flask(__name__)
