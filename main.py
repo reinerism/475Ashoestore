@@ -40,7 +40,7 @@ def get_db():
         # so that your application can use 127.0.0.1:3306 to connect to your
         # Cloud SQL instance
         host = '127.0.0.1'
-        cnx = pymysql.connect(user=db_user, password=db_password,
+        return pymysql.connect(user=db_user, password=db_password,
                               host=host, db=db_name)
 
 
