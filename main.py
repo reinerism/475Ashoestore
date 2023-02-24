@@ -1,47 +1,58 @@
-from flask import Flask, render_template, request
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# [START gae_python37_cloudsql_mysql]
 import os
+
+from flask import Flask
 import pymysql
 
-# Get database connection details from environment variables
-db_user = os.environ['MYSQL_USER']
-db_password = os.environ['MYSQL_PASSWORD']
-db_name = os.environ['MYSQL_DATABASE']
-cloud_sql_connection_name = os.environ['CLOUD_SQL_CONNECTION_NAME']
+db_user = os.environ.get('CLOUD_SQL_USERNAME')
+db_password = os.environ.get('CLOUD_SQL_PASSWORD')
+db_name = os.environ.get('CLOUD_SQL_DATABASE_NAME')
+db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
 
-# Create a connection object to the Cloud SQL database
-cnx = pymysql.connect(host= '10.44.160.4', user=db_user, password=db_password, database=db_name)
-
-# Create a Flask app object
 app = Flask(__name__)
 
-# Define a route for the homepage
+
 @app.route('/')
-def index():
-    column_names = []
-    results = []
+def main():
+    # When deployed to App Engine, the `GAE_ENV` environment variable will be
+    # set to `standard`
+    if os.environ.get('GAE_ENV') == 'standard':
+        # If deployed, use the local socket interface for accessing Cloud SQL
+        unix_socket = '/cloudsql/{}'.format(db_connection_name)
+        cnx = pymysql.connect(user=db_user, password=db_password,
+                              unix_socket=unix_socket, db=db_name)
+    else:
+        # If running locally, use the TCP connections instead
+        # Set up Cloud SQL Proxy (cloud.google.com/sql/docs/mysql/sql-proxy)
+        # so that your application can use 127.0.0.1:3306 to connect to your
+        # Cloud SQL instance
+        host = '127.0.0.1'
+        cnx = pymysql.connect(user=db_user, password=db_password,
+                              host=host, db=db_name)
 
-    
-    # Hardcoded SQL query
-    query_string = "SELECT * FROM SHOE"
+    with cnx.cursor() as cursor:
+        cursor.execute('YOUR QUERY GOES HERE;')
+        result = cursor.fetchall()
+        current_msg = result[0][0]
+    cnx.close()
 
-    # Create a cursor object for executing SQL queries
-    cursor = cnx.cursor()
+    return str(current_msg)
+# [END gae_python37_cloudsql_mysql]
 
-    # Execute the query
-    cursor.execute(query_string)
 
-    # Fetch the results
-    results = cursor.fetchall()
-
-    # Get the column names
-    column_names = [i[0] for i in cursor.description]
-
-    # Close the cursor
-    cursor.close()
-
-    # Render the results template with the query results and column names
-    return render_template('index.html', results=results, column_names=column_names)
-
-# Run the app
 if __name__ == '__main__':
-    app.run()
+    app.run(host='127.0.0.1', port=8080, debug=True)
