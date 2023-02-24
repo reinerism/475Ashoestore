@@ -23,6 +23,7 @@ def index():
 # Define a route for executing SQL queries
 @app.route('/', methods=['POST'])
 def query():
+  try:
     # Get the query string from the form submission
     query_string = request.form['query']
     # Create a cursor object for executing SQL queries
@@ -37,6 +38,9 @@ def query():
     cursor.close()
     # Render the results template with the query results and column names
     return render_template('index.html', results=results, column_names=column_names)
+  # error handling for bad post request
+  except Exception as e:
+    return 'Error: ' + str(e), 400
 
 # Run the app
 if __name__ == '__main__':
