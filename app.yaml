@@ -14,4 +14,4 @@ handlers:
   upload: templates/index.html
   
 vpc_access_connector:
-  name: projects/css475aw23shoestore/locations/us-west1/connectors/shoestorevpc
+  name: projects/css475aw23shoestore/locations/us-west1/connectors/shoestoreconnector
