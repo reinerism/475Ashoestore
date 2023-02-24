@@ -50,7 +50,7 @@ def main():
         current_msg = result[0][0]
     cnx.close()
 
-    return str(current_msg)
+    return render_template('index.html', current_msg = current_msg)
 # [END gae_python37_cloudsql_mysql]
 
 
