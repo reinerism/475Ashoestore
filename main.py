@@ -50,8 +50,9 @@ def main():
         host = '127.0.0.1'
         cnx =  pymysql.connect(user=db_user, password=db_password,
                                 host=host, db=db_name)
-    
+        
     current_msg = get_query(cnx)
+    cnx.close()
 
     return str(current_msg)
     
