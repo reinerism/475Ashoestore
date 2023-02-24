@@ -21,7 +21,22 @@
 		<p>Type a command:</p>
 		<input type="text" id="command-input" />
 		<button onclick="executeCommand()">Execute</button>
-		<p id="output"></p>
+		<table id="output">
+			{% if results %}
+			<tr>
+				{% for column_name in column_names %}
+				<th>{{ column_name }}</th>
+				{% endfor %}
+			</tr>
+			{% for row in results %}
+			<tr>
+				{% for value in row %}
+				<td>{{ value }}</td>
+				{% endfor %}
+			</tr>
+			{% endfor %}
+			{% endif %}
+		</table>
 	</main>
 
 	<script>
