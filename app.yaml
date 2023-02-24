@@ -13,7 +13,5 @@ handlers:
   static_files: templates/index.html
   upload: templates/index.html
   
- network:
-  name: shoestorevpc
-  subnetwork_name: ''
-  gce_region: us-west1
+vpc_access_connector:
+  name: projects/css475aw23shoestore/locations/us-west1/connectors/shoestorevpc
