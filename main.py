@@ -18,8 +18,10 @@ app = Flask(__name__)
 # Define a route for the homepage
 @app.route('/')
 def index():
-    return render_template('index.html')
-
+    column_names = []
+    results = []
+    return render_template('index.html', results=results, column_names=column_names)
+  
 # Define a route for executing SQL queries
 @app.route('/', methods=['POST'])
 def query():
@@ -36,8 +38,12 @@ def query():
     column_names = [i[0] for i in cursor.description]
     # Close the cursor
     cursor.close()
+    if results:
     # Render the results template with the query results and column names
-    return render_template('index.html', results=results, column_names=column_names)
+      return render_template('index.html', results=results, column_names=column_names)
+    else:
+      error = 'No Results Found'
+      return render_template('index.html', error=error)
   # error handling for bad post request
   except Exception as e:
     return 'Error: ' + str(e), 400
