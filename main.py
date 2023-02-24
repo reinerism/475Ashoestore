@@ -36,7 +36,7 @@ def query():
     # Close the cursor
     cursor.close()
     # Render the results template with the query results and column names
-    return render_template('results.html', results=results, column_names=column_names)
+    return render_template('index.html', results=results, column_names=column_names)
 
 # Run the app
 if __name__ == '__main__':
