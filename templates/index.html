@@ -18,9 +18,11 @@
 
 	<main>
 		<h1>Shoe Store Menu</h1>
-		<p>Type a command:</p>
-		<input type="text" id="command-input" />
-		<button onclick="executeCommand()">Execute</button>
+		<form action="/" method="post">
+			<label for="query-input">Enter a query:</label>
+			<input type="text" id="query-input" name="query" />
+			<button type="submit">Submit</button>
+		</form>
 		<table id="output">
 			{% if results %}
 			<tr>
@@ -38,14 +40,6 @@
 			{% endif %}
 		</table>
 	</main>
-
-	<script>
-		function executeCommand() {
-			var input = document.getElementById("command-input").value;
-			var output = document.getElementById("output");
-			output.innerHTML = "You entered: " + input;
-		}
-	</script>
 
 	<footer>
 		<p>Copyright © 2023</p>
