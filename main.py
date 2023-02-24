@@ -46,16 +46,16 @@ def get_db():
 
 @app.route('/')
 def main():
-    db = get_db
+    db = get_db()
 
     with db.cursor() as cursor:
-        cursor.execute('YOUR QUERY GOES HERE;')
+        cursor.execute('select temp_txt from temp_tbl;')
         result = cursor.fetchall()
         current_msg = result[0][0]
     db.close()
 
-    return str(current_msg)
-    # return render_template('index.html', current_msg = current_msg)
+    #return str(current_msg)
+    return render_template('index.html', current_msg = current_msg)
 # [END gae_python37_cloudsql_mysql]
 
 
