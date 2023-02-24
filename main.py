@@ -15,7 +15,7 @@
 # [START gae_python37_cloudsql_mysql]
 import os
 
-from flask import Flask
+from flask import Flask, render_template
 import pymysql
 
 db_user = os.environ.get('CLOUD_SQL_USERNAME')
@@ -25,7 +25,9 @@ db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
 
 app = Flask(__name__)
 
-def get_db():
+
+@app.route('/')
+def main():
     # When deployed to App Engine, the `GAE_ENV` environment variable will be
     # set to `standard`
     if os.environ.get('GAE_ENV') == 'standard':
@@ -42,19 +44,14 @@ def get_db():
         return pymysql.connect(user=db_user, password=db_password,
                               host=host, db=db_name)
 
-def get_query(cnx):
     with cnx.cursor() as cursor:
         cursor.execute('YOUR QUERY GOES HERE;')
         result = cursor.fetchall()
         current_msg = result[0][0]
-    return current_msg
+    cnx.close()
 
-@app.route('/')
-def main():
-    cnx = get_db
-    current_msg = get_query(cnx)
-
-    return str(current_msg)
+    #return str(current_msg)
+    return render_template('index.html', current_msg = current_msg)
 # [END gae_python37_cloudsql_mysql]
 
 
