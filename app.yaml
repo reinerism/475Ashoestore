@@ -1,5 +1,7 @@
 runtime: python39
 
+entrypoint: gunicorn -b :$PORT main:app
+
 env_variables:
   MYSQL_USER: mastershoe
   MYSQL_PASSWORD: shoe
@@ -10,3 +12,8 @@ handlers:
 - url: /
   static_files: templates/index.html
   upload: templates/index.html
+  
+ network:
+  name: shoestorevpc
+  subnetwork_name: ''
+  gce_region: us-west1
