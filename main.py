@@ -30,7 +30,7 @@
 # [START gae_python37_cloudsql_mysql]
 import os
 
-from flask import Flask
+from flask import Flask, request, render_template
 import pymysql
 
 db_user = os.environ.get('CLOUD_SQL_USERNAME')
@@ -57,21 +57,25 @@ def get_db():
                               host=host, db=db_name)
 
 
-def get_query(cnx):
+def get_query(cnx, query):
     with cnx.cursor() as cursor:
-        cursor.execute('select demo_txt from demo_tbl;')
+        cursor.execute(query)
         result = cursor.fetchall()
-        current_msg = result[0][0]
-    return current_msg
+        column_names = [i[0] for i in cursor.description]
+    return column_names, result
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def main():
     
     cnx = get_db()
-    current_msg = get_query(cnx)
+    if request.method =='POST':
+        query = request.form['query']
+        column_names, result = get_query(cnx, query)
+        return render_template('home.html', names = column_names, result=result)
+    
     cnx.close()
 
-    return str(current_msg)
+    return render_template('home.html')
 # [END gae_python37_cloudsql_mysql]
 
 
