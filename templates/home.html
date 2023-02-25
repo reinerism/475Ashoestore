@@ -14,15 +14,31 @@
     </form>
     {% if query_results %}
     <h2>Query Results</h2>
-    <ul>
-        {% for row in query_results %}
-            <li>{{ row }}</li>
-        {% endfor %}
+    <table>
+        <thead>
+          <tr>
+            {% for column_name in column_names %}
+              <th>{{ column_name }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in results %}
+            <tr>
+              {% for value in row %}
+                <td>{{ value }}</td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </ul>
     {% endif %}
     <footer>
         <p>&copy; 2023 Pineapple Shoe Store</p>
         <p>Created by Reiner Opitz</p>
+        <p>This site and data are for educational purposes only</p>
+        <p>Do not insert any sensitive personal data</p>
     </footer>
 </body>
 </html>

@@ -61,10 +61,10 @@ def get_query(cnx, query):
     with cnx.cursor() as cursor:
         cursor.execute(query)
         result = cursor.fetchall()
-        #column_names = [i[0] for i in cursor.description]
-        print(result) # added to debug the result returned from the database
-    #return column_names, result
-    return result
+        column_names = [i[0] for i in cursor.description]
+        # print(result) # added to debug the result returned from the database
+    return column_names, result
+    #return result
 
 @app.route('/', methods=['GET', 'POST'])
 def main():
@@ -72,9 +72,9 @@ def main():
     cnx = get_db()
     if request.method =='POST':
         query = request.form['query']
-        result = get_query(cnx, query)
+        column_names, result = get_query(cnx, query)
         # print(column_names, result)  # Add this line to check the query results
-        return render_template('home.html', result=result)
+        return render_template('home.html', result=result, column_names = column_names)
     
     cnx.close()
 
