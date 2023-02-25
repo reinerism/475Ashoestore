@@ -71,7 +71,9 @@ def main():
     
     cnx = get_db()
     if request.method =='POST':
-        query = request.form['query']
+        #query = request.form['query']
+        #testing a hardcoded query in the post format
+        query = 'SELECT * FROM SHOE'
         column_names, result = get_query(cnx, query)
         # print(column_names, result)  # Add this line to check the query results
         return render_template('home.html', result=result, column_names = column_names)

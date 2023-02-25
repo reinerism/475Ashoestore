@@ -5,12 +5,10 @@
 </head>
 <body>
     <h1>Welcome to Pineapple Shoe Store Database</h1>
-    <form action="/" method="post">
-        <label for="query">Enter your query:</label>
-        <br>
-        <textarea id="query" name="query" rows="5" cols="40"></textarea>
-        <br>
-        <input type="submit" value="Submit">
+    <form method="post">
+        <label for="query">Enter your Shoestore query:</label>
+        <textarea name="query" id="query"></textarea>
+        <input type="submit" value="Execute Query">
     </form>
     {% if query_results %}
     <h2>Query Results</h2>
