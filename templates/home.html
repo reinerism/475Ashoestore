@@ -5,12 +5,6 @@
 </head>
 <body>
     <h1>Welcome to Pineapple Shoe Store Database</h1>
-    <form method="post">
-        <label for="query">Enter your Shoestore query:</label>
-        <textarea name="query" id="query"></textarea>
-        <input type="submit" value="Execute Query">
-    </form>
-    {% if query_results %}
     <h2>Query Results</h2>
     <table>
         <thead>
@@ -30,8 +24,6 @@
           {% endfor %}
         </tbody>
       </table>
-    </ul>
-    {% endif %}
     <footer>
         <p>&copy; 2023 Pineapple Shoe Store</p>
         <p>Created by Reiner Opitz</p>
