@@ -30,7 +30,7 @@
 # [START gae_python37_cloudsql_mysql]
 import os
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 import pymysql
 
 db_user = os.environ.get('CLOUD_SQL_USERNAME')
@@ -57,13 +57,16 @@ def get_db():
                               host=host, db=db_name)
 
 
-def get_query(cnx, query):
+def get(cnx):
     with cnx.cursor() as cursor:
-        cursor.execute(query)
-        result = cursor.fetchall()
-        column_names = [desc[0] for desc in cursor.description]
+        result = cursor.execute('select * from SHOE;')
+        shoes = cursor.fetchall()
+        if result > 0:
+            got_shoes = jsonify(shoes)
+        else:
+            got_shoes = 'No Shoes in DB'
         # print(result) # added to debug the result returned from the database
-    return column_names, result
+        return got_shoes
     #return result
 
 @app.route('/', methods=['GET', 'POST'])
@@ -71,11 +74,11 @@ def main():
     
     cnx = get_db()
     if request.method =='GET':
-        query = request.form['query']
-        column_names, result = get_query(cnx, query)
+        # query = request.form['query']
+        result = get(cnx)
         # print(column_names, result)  # Add this line to check the query results
         cnx.close()
-        return render_template('home.html',column_names=column_names, result=result)  
+        return render_template('home.html',result=result)  
     else: 
         cnx.close()
         return render_template('home.html')
