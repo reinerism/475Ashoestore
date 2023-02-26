@@ -70,7 +70,7 @@ def get_query(cnx, query):
 def main():
     
     cnx = get_db()
-    if request.method =='POST':
+    if request.method =='GET':
         query = request.form['query']
         column_names, result = get_query(cnx, query)
         # print(column_names, result)  # Add this line to check the query results
