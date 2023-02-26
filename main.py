@@ -57,31 +57,31 @@ def get_db():
                               host=host, db=db_name)
 
 
-def get_query(cnx, query):
+"""def get_query(cnx, query):
     with cnx.cursor() as cursor:
         cursor.execute(query)
         result = cursor.fetchall()
         column_names = [i[0] for i in cursor.description]
         # print(result) # added to debug the result returned from the database
     return column_names, result
-    #return result
+    #return result"""
 
-#@app.route('/', methods=['GET', 'POST'])
-
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def main():
     
     cnx = get_db()
-    #if request.method =='POST':
-        #query = request.form['query']
-        #testing a hardcoded query in the post format
-    query = 'SELECT * FROM SHOE'
-    column_names, result = get_query(cnx, query)
+    if request.method =='POST':
+        query = request.form['query']
+        with cnx.cursor() as cursor:   
+            cursor.excute(query)
+            result = cursor.fetchall()
+            column_names = [desc[0] for desc in cursor.description]
         # print(column_names, result)  # Add this line to check the query results
-    cnx.close()
-    return render_template('home.html', result=result, column_names = column_names)  
-
-    #return render_template('home.html')
+        cnx.close()
+        return render_template('home.html',column_names=column_names, result=result)  
+    else: 
+        cnx.close()
+        return render_template('home.html')
 # [END gae_python37_cloudsql_mysql]
 
 
