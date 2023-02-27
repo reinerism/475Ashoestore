@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START gae_python37_cloudsql_mysql]
+# [START gae_python39_cloudsql_mysql]
 # Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,11 +27,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START gae_python37_cloudsql_mysql]
+# [START gae_python39_cloudsql_mysql]
 import os
 
 from flask import Flask, request, render_template, jsonify
 import pymysql
+import sqlalchemy
 
 db_user = os.environ.get('CLOUD_SQL_USERNAME')
 db_password = os.environ.get('CLOUD_SQL_PASSWORD')
@@ -57,7 +58,7 @@ def get_db():
                               host=host, db=db_name)
 
 
-def get(cnx):
+"""def get(cnx):
     with cnx.cursor() as cursor:
         result = cursor.execute('select * from SHOE;')
         shoes = cursor.fetchall()
@@ -67,13 +68,36 @@ def get(cnx):
             got_shoes = 'No Shoes in DB'
         # print(result) # added to debug the result returned from the database
         return got_shoes
-    #return result
+    #return result"""
 
-@app.route('/', methods=['GET', 'POST'])
+
+@app.route('/')
 def main():
-    
+    # Connect to Cloud SQL instance using Cloud SQL Proxy
     cnx = get_db()
-    if request.method =='GET':
+    with cnx.cursor() as cursor:
+        cursor.execute('SELECT 1')
+        result = cursor.fetchone()
+    cnx.close()
+    
+    # Return query result as string
+    return str(result[0])
+    """cnx = get_db()
+    with cnx.cursor() as cursor:
+        cursor.execute('SELECT 1;')
+        result = cursor.fetchone()
+    cnx.close()
+    return str(result[0])"""
+    #return 'Welcome to the test page for Team Pineapple Shoe Store Database'
+
+    """cnx = get_db()
+    with cnx.cursor() as cursor:
+        cursor.execute('select demo_txt from demo_tbl;')
+        result = cursor.fetchall()
+        current_msg = result[0][0]
+    cnx.close()
+    return str(current_msg)"""
+"""    if request.method =='GET':
         # query = request.form['query']
         result = get(cnx)
         # print(column_names, result)  # Add this line to check the query results
@@ -81,7 +105,8 @@ def main():
         return render_template('home.html',result=result)  
     else: 
         cnx.close()
-        return render_template('home.html')
+        return render_template('home.html')"""
+
 # [END gae_python37_cloudsql_mysql]
 
 
