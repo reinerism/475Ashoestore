@@ -82,7 +82,7 @@ def main():
     query = 'SELECT * FROM SHOE;'
     result = get(cnx, query)
     cnx.close()
-    return render_template(result[0])
+    return str(result)
     #return 'Welcome to the test page for Team Pineapple Shoe Store Database'
 
 # [END gae_python37_cloudsql_mysql]
