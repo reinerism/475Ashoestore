@@ -79,8 +79,8 @@ def main():
     # Return query result as string
    
     cnx = get_db()
-    result = get(cnx, query)
     query = 'SELECT * FROM SHOE;'
+    result = get(cnx, query)
     cnx.close()
     return render_template(result[0])
     #return 'Welcome to the test page for Team Pineapple Shoe Store Database'
