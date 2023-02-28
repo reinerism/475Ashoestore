@@ -61,8 +61,6 @@ def get(cnx, query):
     with cnx.cursor() as cursor:
         cursor.execute(query)
         result = cursor.fetchall()
-    cnx.close()
-    
     # Return query result as string
     return (result)
 
