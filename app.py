@@ -61,23 +61,14 @@ def get(cnx, query):
     with cnx.cursor() as cursor:
         cursor.execute(query)
         result = cursor.fetchall()
+        curr_msg = result[0][0]
     # Return query result as string
-    return (result)
+    return (curr_msg)
 
 
 @app.route('/', methods=['GET'])
 def main():
     # Connect to Cloud SQL instance using Cloud SQL Proxy
-    """if request.method =='GET':
-        cnx = get_db()
-        query = request.form
-        result = get(cnx, query)
-        cnx.close()
-        return result
-    else :
-        return render_template('home.html')"""
-    # Return query result as string
-   
     cnx = get_db()
     query = 'SELECT * FROM SHOE;'
     result = get(cnx, query)
