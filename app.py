@@ -53,8 +53,9 @@ def get_db():
         # Set up Cloud SQL Proxy (cloud.google.com/sql/docs/mysql/sql-proxy)
         # so that your application can use 127.0.0.1:3306 to connect to your
         # Cloud SQL instance
-        return pymysql.connect(user='mastershoe', password='shoe',
-                              host='127.0.0.1', db='shoestore')
+        host = '127.0.0.1'
+        return pymysql.connect(user=db_user, password=db_password,
+                              host=host, db=db_name)
 
 
 """def get(cnx, query):
