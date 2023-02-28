@@ -53,35 +53,31 @@ def get_db():
         # Set up Cloud SQL Proxy (cloud.google.com/sql/docs/mysql/sql-proxy)
         # so that your application can use 127.0.0.1:3306 to connect to your
         # Cloud SQL instance
-        host = '127.0.0.1'
-        return pymysql.connect(user=db_user, password=db_password,
-                              host=host, db=db_name)
+        return pymysql.connect(user='mastershoe', password='shoe',
+                              host='127.0.0.1', db='shoestore')
 
 
-"""def get(cnx):
+def get(cnx, query):
     with cnx.cursor() as cursor:
-        result = cursor.execute('select * from SHOE;')
-        shoes = cursor.fetchall()
-        if result > 0:
-            got_shoes = jsonify(shoes)
-        else:
-            got_shoes = 'No Shoes in DB'
-        # print(result) # added to debug the result returned from the database
-        return got_shoes
-    #return result"""
-
-
-@app.route('/')
-def main():
-    # Connect to Cloud SQL instance using Cloud SQL Proxy
-    cnx = get_db()
-    with cnx.cursor() as cursor:
-        cursor.execute('SELECT 1')
-        result = cursor.fetchone()
+        cursor.execute(query)
+        result = cursor.fetchall()
     cnx.close()
     
     # Return query result as string
-    return str(result[0])
+    return str(result)
+
+
+@app.route('/', methods=['GET'])
+def main():
+    # Connect to Cloud SQL instance using Cloud SQL Proxy
+    cnx = get_db()
+    query = request.args.get('query')
+    result = get(cnx, query)
+    cnx.close()
+    return result
+    
+    # Return query result as string
+   
     """cnx = get_db()
     with cnx.cursor() as cursor:
         cursor.execute('SELECT 1;')
