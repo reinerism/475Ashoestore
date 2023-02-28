@@ -70,7 +70,7 @@ def get(cnx, query):
 def main():
     # Connect to Cloud SQL instance using Cloud SQL Proxy
     cnx = get_db()
-    query = 'SELECT * FROM SHOE;'
+    query = 'select demo_txt from demo_tbl;'
     result = get(cnx, query)
     cnx.close()
     return str(result)
