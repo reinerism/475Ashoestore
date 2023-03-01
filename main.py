@@ -56,8 +56,8 @@ def get_db():
         host = '127.0.0.1'
         return pymysql.connect(user=db_user, password=db_password,
                               host=host, db=db_name)
-
-def get(cnx):
+# this is a working state if we need to come back later
+"""def get(cnx):
     with cnx.cursor() as cursor:
         cursor.execute('select demo_txt from demo_tbl;')
         result = cursor.fetchall()
@@ -70,7 +70,29 @@ def main():
     result = get(cnx)
     # Return query result as string
     cnx.close()
-    return render_template('home.html', result=str(result))
+    return render_template('home.html', result=str(result))"""
+
+def get(cnx, query):
+    with cnx.cursor() as cursor:
+        cursor.execute(query)
+        result = cursor.fetchall()
+        curr_msg = result[0][0]
+    return curr_msg
+
+@app.route('/', methods = ['GET', 'POST'])
+def main():
+    cnx = get_db()
+    if request.method == 'POST':
+        user_query = request.form['query']
+        result = get(cnx, user_query)
+    # Return query result as string
+        cnx.close()
+        return render_template('home.html', result=str(result))
+    else:
+        cnx.close()
+        return render_template('home.html')
+
+
 
 # [END gae_python37_cloudsql_mysql]
 
