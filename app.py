@@ -58,28 +58,16 @@ def get_db():
                               host=host, db=db_name)
 
 
-"""def get(cnx, query):
-    with cnx.cursor() as cursor:
-        cursor.execute(query)
-        result = cursor.fetchall()
-        curr_msg = result[0][0]
-    # Return query result as string
-    return (curr_msg)"""
-
-
-@app.route('/', methods=['GET'])
+@app.route('/')
 def main():
-    # Connect to Cloud SQL instance using Cloud SQL Proxy
     cnx = get_db()
-    with cnx.cursor as cursor:
+    with cnx.cursor() as cursor:
         cursor.execute('select demo_txt from demo_tbl;')
         result = cursor.fetchall()
         curr_msg = result[0][0]
-    #query = 'select demo_txt from demo_tbl;'
-    # result = get(cnx, query)
+    # Return query result as string
     cnx.close()
-    return str(curr_msg)
-    #return 'Welcome to the test page for Team Pineapple Shoe Store Database'
+    return str (curr_msg)
 
 # [END gae_python37_cloudsql_mysql]
 
