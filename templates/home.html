@@ -5,6 +5,14 @@
 </head>
 <body>
     <h1>Welcome to Pineapple Shoe Store Database</h1>
+    <form method="post" action="/">
+        <div>
+            <label for="query">Enter your query:</label>
+            <input type="text" name="query" id="query">
+        </div>
+        <div>
+            <input type="submit" value="Submit Query">
+        </div>
     <h2>Query Results</h2>
     <div>{{ result }}</div>
     <footer>
