@@ -30,7 +30,7 @@
 # [START gae_python39_cloudsql_mysql]
 import os
 
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, redirect, url_for
 import pymysql
 import sqlalchemy
 
@@ -75,7 +75,16 @@ def get(cnx, query):
 def main():
     cnx = get_db()
     if request.method == 'POST':
+        # may want to test request.form.get
+        # current implementation raises a "KeyError"
+        # if the query field is missing
+        # request.form.get returns 'None'
         user_query = request.form['query']
+        # this block is used to avoid an blank submission to database
+        # avoid internal service error
+        if not user_query:
+            cnx.close()
+            return redirect(url_for('main'))
         result = get(cnx, user_query)
     # Return query result as string
         cnx.close()

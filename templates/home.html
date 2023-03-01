@@ -20,7 +20,8 @@
     <table>
         <thead>
             <tr>
-                {% for col in result[0] %}
+                {% for col in result[0].keys() %}
+                <!-- th is table header -->
                 <th>{{ col }}</th>
                 {% endfor %}
             </tr>
@@ -28,7 +29,8 @@
         <tbody>
             {% for row in result %}
             <tr>
-                {% for col in row %}
+                <!-- td is for table data-->
+                {% for col in row.values() %}
                 <td>{{ col }}</td>
                 {% endfor %}
             </tr>
