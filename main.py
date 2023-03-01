@@ -56,28 +56,20 @@ def get_db():
         host = '127.0.0.1'
         return pymysql.connect(user=db_user, password=db_password,
                               host=host, db=db_name)
-# this is a working state if we need to come back later
-"""def get(cnx):
-    with cnx.cursor() as cursor:
-        cursor.execute('select demo_txt from demo_tbl;')
-        result = cursor.fetchall()
-        curr_msg = result[0][0]
-    return curr_msg
 
-@app.route('/')
-def main():
-    cnx = get_db()
-    result = get(cnx)
-    # Return query result as string
-    cnx.close()
-    return render_template('home.html', result=str(result))"""
-
-def get(cnx, query):
+"""def get(cnx, query):
     with cnx.cursor() as cursor:
         cursor.execute(query)
         result = cursor.fetchall()
         curr_msg = result[0][0]
-    return curr_msg
+    return curr_msg"""
+
+def get(cnx, query):
+    with cnx.cursor() as cursor:
+        cursor.execute(query)
+        # the result is a list of tuples
+        result = cursor.fetchall()
+    return result
 
 @app.route('/', methods = ['GET', 'POST'])
 def main():
@@ -87,7 +79,7 @@ def main():
         result = get(cnx, user_query)
     # Return query result as string
         cnx.close()
-        return render_template('home.html', result=str(result))
+        return render_template('home.html', result=result)
     else:
         cnx.close()
         return render_template('home.html')
