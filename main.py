@@ -92,9 +92,8 @@ def main():
             cnx.close()
             return render_template('home.html', result=result)
         except Exception as e:
-            flash(f'Error executing query: {e}')
             cnx.close()
-            return redirect(url_for('main'))
+            return render_template('home.html', error=str(e))
     else:
         cnx.close()
         return render_template('home.html')
