@@ -70,7 +70,7 @@ def main():
     result = get(cnx)
     # Return query result as string
     cnx.close()
-    return str (result)
+    return render_template('home.html', result=str(result))
 
 # [END gae_python37_cloudsql_mysql]
 
