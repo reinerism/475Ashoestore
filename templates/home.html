@@ -15,12 +15,15 @@
         </div>
     <!--need to add a dynmaic table for the results-->
     <h2>Query Results</h2>
-    {% if result %}
+    <!-- error handling for invalid query-->
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% elif result %}
     <!-- <div>{{ result }}</div> this was a quick line to test code -->
     <table>
         <thead>
             <tr>
-                {% for col in result[0].keys() %}
+                {% for col in result %}
                 <!-- th is table header -->
                 <th>{{ col }}</th>
                 {% endfor %}
@@ -30,13 +33,16 @@
             {% for row in result %}
             <tr>
                 <!-- td is for table data-->
-                {% for col in row.values() %}
+                {% for col in row%}
                 <td>{{ col }}</td>
                 {% endfor %}
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    {% else %}
+    <p>Looks like you didn't enter anything.</p>
+    <p>Please enter a valid query.</p>
     {% endif %}
     <footer>
         <p>&copy; 2023 Pineapple Shoe Store</p>

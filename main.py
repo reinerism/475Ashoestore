@@ -30,7 +30,7 @@
 # [START gae_python39_cloudsql_mysql]
 import os
 
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, flash
 import pymysql
 import sqlalchemy
 
@@ -79,16 +79,22 @@ def main():
         # current implementation raises a "KeyError"
         # if the query field is missing
         # request.form.get returns 'None'
+        
         user_query = request.form['query']
         # this block is used to avoid an blank submission to database
         # avoid internal service error
         if not user_query:
             cnx.close()
             return redirect(url_for('main'))
-        result = get(cnx, user_query)
+        try:
+            result = get(cnx, user_query)
     # Return query result as string
-        cnx.close()
-        return render_template('home.html', result=result)
+            cnx.close()
+            return render_template('home.html', result=result)
+        except Exception as e:
+            flash(f'Error executing query: {e}')
+            cnx.close()
+            return redirect(url_for('main'))
     else:
         cnx.close()
         return render_template('home.html')
