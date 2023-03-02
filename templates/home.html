@@ -4,35 +4,52 @@
     <title>Team Pineapple's Shoe Store Database</title>
 <style>
     table {
-          border-collapse: collapse;
-          width: 25%;
-        }
+        border-collapse: collapse;
+        width: 25%;
+    }
         
     th, td {
-          text-align: left;
-          padding: 8px;
-          border-bottom: 1px solid #ddd;
-        }
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
         
     th {
-          background-color: #f2f2f2;
-          color: black;
-          border-top: 1px solid #ddd;
-          border-right: 1px solid #ddd;
-        }
+        background-color: #f2f2f2;
+        color: black;
+        border-top: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+    }
         
     td {
-          border-right: 1px solid #ddd;
-        }
+        border-right: 1px solid #ddd;
+    }
 </style>
+<style>
+    .logo {
+      float: left;
+      margin-right: 10px;
+    }
+    
+    .store-name {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    
+    .store-header {
+      overflow: auto;
+    }
+    </style>
 </head>
 <body>
     <!-- <img src="{{ url_for('static', filename='images/Pineapple.png') }}" alt="Pineapple">
         tried to test this url_for static file
         <img src="{{ url_for('static', filename='images/Sneakers.png') }}" alt="Sneakers">-->
-    <img src="/static/images/Pineapple.jpg" alt="Pineapple" width="100" height="100">
-    <h1>Welcome to Team Pineapple's Shoe Store Database</h1>
-    <img src="/static/images/Sneakers.jpg" alt="Sneakers" width="100" height="100">
+    <div class="store-header">
+        <img src="/static/images/Pineapple.jpg" alt="Pineapple" width="100" height="100">
+        <h1>Welcome to Team Pineapple's Shoe Store Database</h1>
+        <img src="/static/images/Sneakers.jpg" alt="Sneakers" width="100" height="100">
+    </div>
     <form method="post" action="/">
         <div>
             <label for="query">Enter your query:</label>
