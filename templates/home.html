@@ -23,8 +23,7 @@
     <table>
         <thead>
             <tr>
-                {{ col_names_str }}
-                {% for col in result[0] %}
+                {% for col in col_names %}
                 <!-- th is table header -->
                 <th>{{ col }}</th>
                 {% endfor %}

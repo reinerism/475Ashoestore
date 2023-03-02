@@ -68,8 +68,11 @@ def get(cnx, query):
     with cnx.cursor() as cursor:
         cursor.execute(query)
         # the result is a list of tuples
+        # col name fix: need to get the description attribute
+        # from the first entry in the table
+        col_names = [col[0] for col in cursor.description]
         result = cursor.fetchall()
-    return result
+    return col_names, result
 
 @app.route('/', methods = ['GET', 'POST'])
 def main():
@@ -87,12 +90,10 @@ def main():
             cnx.close()
             return redirect(url_for('main'))
         try:
-            result = get(cnx, user_query)
-            col_names = result[0] #first row should be col names
-            col_names_str = str(col_names) # convert to string
+            col_names, result = get(cnx, user_query)
     # Return query result as string
             cnx.close()
-            return render_template('home.html', result=result, col_names_str = col_names )
+            return render_template('home.html', result=result, col_names = col_names )
         except Exception as e:
             cnx.close()
             return render_template('home.html', error=str(e))
