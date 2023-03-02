@@ -33,7 +33,6 @@
 
     .store-header {
         display: flex;
-        align-items: center;
         justify-content: center;
     }
 
@@ -47,12 +46,12 @@
     <!-- <img src="{{ url_for('static', filename='images/Pineapple.png') }}" alt="Pineapple">
         tried to test this url_for static file
         <img src="{{ url_for('static', filename='images/Sneakers.png') }}" alt="Sneakers">-->
+    <div class="container">
     <div class="store-header">
         <img src="/static/images/Pineapple.jpg" alt="Pineapple Logo" class="logo" width="100" height="100">
         <h1>Welcome to Team Pineapple's Shoe Store Database</h1>
         <img src="/static/images/Sneakers.jpg" alt="Sneakers Logo" class="logo" width="100" height="100">
     </div>
-    <div class="container">
     <form method="post" action="/">
         <div>
             <label for="query">Enter your query:</label>
