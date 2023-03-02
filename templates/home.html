@@ -5,7 +5,7 @@
 <style>
     table {
           border-collapse: collapse;
-          width: 100%;
+          width: 25%;
         }
         
     th, td {
@@ -60,6 +60,7 @@
             <tr>
                 <!-- td is for table data-->
                 {% for col in row%}
+                <th>{{ col }}</th>
                 <!-- <td style="border: 1px solid black">{{ col }}</td> going to implement style-->
                 {% endfor %}
             </tr>
