@@ -88,9 +88,11 @@ def main():
             return redirect(url_for('main'))
         try:
             result = get(cnx, user_query)
+            col_names = result[0] #first row should be col names
+            col_names_str = str(col_names) # convert to string
     # Return query result as string
             cnx.close()
-            return render_template('home.html', result=result)
+            return render_template('home.html', result=result, col_names_str = col_names )
         except Exception as e:
             cnx.close()
             return render_template('home.html', error=str(e))
