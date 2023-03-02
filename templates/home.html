@@ -27,9 +27,12 @@
 </style>
 </head>
 <body>
-    <img src="{{ url_for('static', filename='images/Pineapple.png') }}" alt="Pineapple">
+    <!-- <img src="{{ url_for('static', filename='images/Pineapple.png') }}" alt="Pineapple">
+        tried to test this url_for static file
+        <img src="{{ url_for('static', filename='images/Sneakers.png') }}" alt="Sneakers">-->
+    <img src="/static/images/Pineapple.jpg" alt="Pineapple">
     <h1>Welcome to Team Pineapple's Shoe Store Database</h1>
-    <img src="{{ url_for('static', filename='images/Sneakers.png') }}" alt="Sneakers">
+    <img src="/static/images/Sneakers.jpg" alt="Sneakers>
     <form method="post" action="/">
         <div>
             <label for="query">Enter your query:</label>
