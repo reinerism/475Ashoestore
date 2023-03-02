@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome to Team Pineapple's Shoe Store Database</title>
+    <title>Team Pineapple's Shoe Store Database</title>
 <style>
     table {
           border-collapse: collapse;
@@ -27,7 +27,9 @@
 </style>
 </head>
 <body>
-    <h1>Welcome to Pineapple Shoe Store Database</h1>
+    <img src="{{ url_for('static', filename='images/Pineapple.png') }}" alt="Pineapple">
+    <h1>Welcome to Team Pineapple's Shoe Store Database</h1>
+    <img src="{{ url_for('static', filename='images/Sneakers.png') }}" alt="Sneakers">
     <form method="post" action="/">
         <div>
             <label for="query">Enter your query:</label>
