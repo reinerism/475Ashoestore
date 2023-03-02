@@ -2,6 +2,29 @@
 <html>
 <head>
     <title>Welcome to Pineapple Shoe Store Database</title>
+<style>
+    table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+    th, td {
+          text-align: left;
+          padding: 8px;
+          border-bottom: 1px solid #ddd;
+        }
+        
+    th {
+          background-color: #f2f2f2;
+          color: black;
+          border-top: 1px solid #ddd;
+          border-right: 1px solid #ddd;
+        }
+        
+    td {
+          border-right: 1px solid #ddd;
+        }
+</style>
 </head>
 <body>
     <h1>Welcome to Pineapple Shoe Store Database</h1>
@@ -22,9 +45,9 @@
     <!-- <div>{{ result }}</div> this was a quick line to test code -->
     <table>
         <thead>
-            <tr>
+            <!--<tr> tried to use colspan will implement a style instead
                 <th colspan="{{ num_cols }}"></th>
-              </tr>
+            </tr>-->
             <tr>
                 {% for col in col_names %}
                 <!-- th is table header -->
@@ -37,7 +60,7 @@
             <tr>
                 <!-- td is for table data-->
                 {% for col in row%}
-                <td style="border: 1px solid black">{{ col }}</td>
+                <!-- <td style="border: 1px solid black">{{ col }}</td> going to implement style-->
                 {% endfor %}
             </tr>
             {% endfor %}
