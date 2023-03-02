@@ -91,9 +91,11 @@ def main():
             return redirect(url_for('main'))
         try:
             col_names, result = get(cnx, user_query)
+            # need this info to merge the table in the HTML
+            num_col = len(col_names)
     # Return query result as string
             cnx.close()
-            return render_template('home.html', result=result, col_names = col_names )
+            return render_template('home.html', result=result, col_names = col_names, num_col = num_col)
         except Exception as e:
             cnx.close()
             return render_template('home.html', error=str(e))

@@ -23,6 +23,9 @@
     <table>
         <thead>
             <tr>
+                <th colspan="{{ num_cols }}"></th>
+              </tr>
+            <tr>
                 {% for col in col_names %}
                 <!-- th is table header -->
                 <th>{{ col }}</th>
