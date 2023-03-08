@@ -53,11 +53,11 @@
                 <option value="store">Store</option>
             </select>
         </div>
-        <div>
+        <div id="customer-query-div">
             <label for="customer_query">Enter customer query:</label>
             <input type="text" name="customer_query" id="customer_query">
         </div>
-        <div>
+        <div id="store-query-div" style="display: none;">
             <label for="store_query">Enter store query:</label>
             <input type="text" name="store_query" id="store_query">
         </div>
@@ -65,6 +65,25 @@
             <input type="submit" value="Submit Query">
         </div>
     </form>
+    
+    <script>
+        const queryUser = document.getElementById('query_user');
+        const customerQueryDiv = document.getElementById('customer-query-div');
+        const storeQueryDiv = document.getElementById('store-query-div');
+        
+        queryUser.addEventListener('change', function() {
+            if (queryUser.value === 'customer') {
+                customerQueryDiv.style.display = '';
+                storeQueryDiv.style.display = 'none';
+            } else if (queryUser.value === 'store') {
+                customerQueryDiv.style.display = 'none';
+                storeQueryDiv.style.display = '';
+            } else {
+                customerQueryDiv.style.display = 'none';
+                storeQueryDiv.style.display = 'none';
+            }
+        });
+    </script>
     <!--need to add a dynmaic table for the results-->
     <h2>Query Results</h2>
     <!-- error handling for invalid query-->
