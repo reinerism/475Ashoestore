@@ -91,15 +91,25 @@ def main():
             gender = request.form.get('shoe_gender')
             max_price = request.form.get('shoe_price') 
              # Construct the SQL query using the selected values
-            query = f"SELECT SHOES.Shoe_id, SHOES.Brand, SHOES.Style, SHOES.Color, SHOE_STORE.Store_id, SHOE_STORE.Store_name \
+            query = "SELECT SHOES.Shoe_id, SHOES.Name, SHOES.Brand, SHOES.Style, SHOES.Color, SHOE_STORE.Store_id, SHOE_STORE.Store_name \
               FROM SHOES \
               INNER JOIN INVENTORY ON SHOES.Shoe_id = INVENTORY.Shoe_id \
               INNER JOIN SHOE_STORE ON INVENTORY.Store_id = SHOE_STORE.Store_id \
-              WHERE SHOES.Style = '{style}' \
-              AND SHOES.Brand = '{brand}' \
-              AND SHOES.Size = '{size}' \
-              AND SHOES.Gender = '{gender}' \
-              AND SHOES.Price <= {max_price}"
+              WHERE 1=1"
+            if style is not None:
+                query += f" AND SHOES.Style = '{style}'"
+
+            if brand is not None:
+                query += f" AND SHOES.Brand = '{brand}'"
+
+            if size is not None:
+                query += f" AND SHOES.Size = '{size}'"
+
+            if gender is not None:
+                query += f" AND SHOES.Gender = '{gender}'"
+
+            if max_price is not None:
+                query += f" AND SHOES.Price <= {max_price}"
         elif query_user == 'store':
             query = request.form.get('store_query')
         # this block is used to avoid an blank submission to database
