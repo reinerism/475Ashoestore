@@ -121,14 +121,14 @@
                 <option value="Women">Women</option>
             </select>
             <br>
-            <input type="submit" value="Submit Query">
+            <button type="button" onclick="submitCustomerQuery()">Submit Query</button>
         </div>
         
         <div id="store-query-div" style="display:none">
             <label for="store_query">Enter store query:</label>
             <input type="text" name="store_query" id="store_query">
             <br>
-            <input type="submit" value="Submit Query">
+            <button type="button" onclick="submitStoreQuery()">Submit Query</button>
         </div>
     </form>
         <div id="store-query-div" style="display: none;">
@@ -149,6 +149,15 @@
         function showStoreOptions() {
             document.getElementById("customer-query-div").style.display = "none";
             document.getElementById("store-query-div").style.display = "block";
+        }
+        function submitCustomerQuery() {
+        // Submit the form data only when the "Submit Query" button is clicked
+        document.getElementById("customer-query-div").getElementsByTagName("form")[0].submit();
+        }
+    
+        function submitStoreQuery() {
+        // Submit the form data only when the "Submit Query" button is clicked
+        document.getElementById("store-query-div").getElementsByTagName("form")[0].submit();
         }
     </script>
     <!--need to add a dynmaic table for the results-->
