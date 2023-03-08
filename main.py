@@ -85,7 +85,17 @@ def main():
         # if the query field is missing
         # request.form.get returns 'None' 
         if query_user == 'customer':
-            query = request.form.get('customer_query')
+            customer_query = request.form.get('customer_query')
+            query = f"SELECT SHOES.shoe_id, SHOES.shoe_brand, SHOES.shoe_type, SHOES.shoe_color, SHOE_STORE.store_id, SHOE_STORE.store_name, SHOE_STORE.store_location \
+              FROM SHOES \
+              INNER JOIN INVENTORY ON SHOES.shoe_id = INVENTORY.shoe_id \
+              INNER JOIN SHOE_STORE ON INVENTORY.store_id = SHOE_STORE.store_id \
+              WHERE SHOES.shoe_style LIKE '%{customer_query}%' \
+              OR SHOES.shoe_brand LIKE '%{customer_query}%' \
+              OR SHOES.shoe_type LIKE '%{customer_query}%' \
+              OR SHOES.shoe_color LIKE '%{customer_query}%' \
+              OR SHOE_STORE.store_name LIKE '%{customer_query}%' \
+              OR SHOE_STORE.store_location LIKE '%{customer_query}%'"
         elif query_user == 'store':
             query = request.form.get('store_query')
         # this block is used to avoid an blank submission to database
