@@ -54,8 +54,17 @@
             </select>
         </div>
         <div id="customer-query-div">
-            <label for="customer_query">Enter customer query:</label>
-            <input type="text" name="customer_query" id="customer_query">
+            <label for="customer_query_type">Select customer query type:</label>
+            <select name="customer_query_type" id="customer_query_type"></select>
+                <option value="search">Search</option>
+                <option value="create">Create</option>
+                <option value="delete">Delete</option>
+                <option value="modify">Modify</option>
+            </select>
+            <div id="customer-query-details">
+                <label for="customer_query">Enter customer query:</label>
+                <input type="text" name="customer_query" id="customer_query">
+            </div>
         </div>
         <div id="store-query-div" style="display: none;">
             <label for="store_query">Enter store query:</label>

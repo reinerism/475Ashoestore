@@ -84,7 +84,7 @@ def main():
         # if the query field is missing
         # request.form.get returns 'None' 
         if query_user == 'customer':
-            query = request.form.get('customer.query')
+            query = request.form.get('customer_query')
         elif query_user == 'store':
             query = request.form.get('store_query')
         # this block is used to avoid an blank submission to database
