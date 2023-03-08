@@ -79,6 +79,7 @@ def main():
     cnx = get_db()
     if request.method == 'POST':
         query_user = request.form.get('query_user')
+
         # may want to test request.form.get
         # current implementation raises a "KeyError"
         # if the query field is missing
@@ -86,9 +87,32 @@ def main():
         if query_user == 'customer':
             query = request.form.get('customer_query')
         elif query_user == 'store':
-            query = request.form.get('store_query')
+            query_type = request.form.get('customer_query_type')
+            if query_type == 'search':
+                name = request.form.get('customer_name')
+                size = request.form.get('customer_size')
+                brand = request.form.get('customer_brand')
+                color = request.form.get('customer_color')
+                price = request.form.get('customer_price')
+                shoe_type = request.form.get('customer_shoe_type')
+                gender = request.form.get('customer_gender')
+                query = f"SELECT * FROM SHOES WHERE Name='{name}' AND Size='{size}' AND Brand='{brand}' AND Color='{color}' AND Price='{price}' AND Style='{shoe_type}' AND Gender='{gender}'"
+            elif query_type == 'create':
+                # Handle INSERT query for customer
+                pass
+            elif query_type == 'delete':
+                # Handle DELETE query for customer
+                pass
+            elif query_type == 'modify':
+                # Handle UPDATE query for customer
+                pass
+            else:
+                cnx.close()
+                return render_template('home.html', error="Invalid Query Type")
         # this block is used to avoid an blank submission to database
         # avoid internal service error
+        elif query_user == 'store':
+            pass
         else:
             cnx.close()
             return render_template('home.html', error="Invalid query user")
