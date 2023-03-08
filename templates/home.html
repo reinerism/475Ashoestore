@@ -47,24 +47,20 @@
     </div>
     <form method="post" action="/">
         <div>
+            <button onclick="showCustomerOptions()">Customer</button>
+            <button onclick="showStoreOptions()">Store</button>
+        </div>
+        <!--<div>
+            used for drop down implementing a button
             <label for="query_user">Select user:</label>
             <select name="query_user" id="query_user">
                 <option value="customer">Customer</option>
                 <option value="store">Store</option>
             </select>
             <button onclick="showCustQuery()">Submit</button>
-        </div>
-        <script>
-        function showCustQuery(){
-            var custQueryDiv = document.getElementById("customer-query-div");
-            custQueryDiv.style.display = "block";
-            var queryUser = document.getElementById("quety_user");
-            if (queryUser.value == "customer"){
-            location.reload
-            }
-        }
-        </script>
-        <div id="customer-query-div" style="display:none">
+        </div> -->
+        
+        <!--<div id="customer-query-div" style="display:none">
             <label for="customer_query_type">Select customer query type:</label>
             <select name="customer_query_type" id="customer_query_type"></select>
                 <option value="search">Search</option>
@@ -93,11 +89,48 @@
             </select>
             <br>
             <input type="submit" value="Submit Query">
-            <!--<div id="customer-query-details">
+            <div id="customer-query-details">
                 <label for="customer_query">Enter customer query:</label>
-                <input type="text" name="customer_query" id="customer_query">-->
+                <input type="text" name="customer_query" id="customer_query">
+        </div>-->
+        <div id="customer-query-div" style="display:none">
+            <label for="customer_query_type">Select customer query type:</label>
+            <select name="customer_query_type" id="customer_query_type">
+                <option value="search">Search</option>
+                <option value="create">Create</option>
+                <option value="delete">Delete</option>
+                <option value="modify">Modify</option>
+            </select>
+            <br>
+            <label for="customer_name">Name:</label>
+            <input type="text" name="customer_name" id="customer_name">
+            <br>
+            <label for="customer_size">Size:</label>
+            <input type="text" name="customer_size" id="customer_size">
+            <br>
+            <label for="customer_price">Price:</label>
+            <input type="text" name="customer_price" id="customer_price">
+            <br>
+            <label for="customer_color">Color:</label>
+            <input type="text" name="customer_color" id="customer_color">
+            <br>
+            <label for="customer_type">Type:</label>
+            <select name="customer_type" id="customer_type">
+                <option value="">--Select Type--</option>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+            </select>
+            <br>
+            <input type="submit" value="Submit Query">
         </div>
+        
+        <div id="store-query-div" style="display:none">
+            <label for="store_query">Enter store query:</label>
+            <input type="text" name="store_query" id="store_query">
+            <br>
+            <input type="submit" value="Submit Query">
         </div>
+    </form>
         <div id="store-query-div" style="display: none;">
             <label for="store_query">Enter store query:</label>
             <input type="text" name="store_query" id="store_query">
@@ -108,22 +141,15 @@
     </form>
     
     <script>
-        const queryUser = document.getElementById('query_user');
-        const customerQueryDiv = document.getElementById('customer-query-div');
-        const storeQueryDiv = document.getElementById('store-query-div');
+        function showCustomerOptions() {
+            document.getElementById("customer-query-div").style.display = "block";
+            document.getElementById("store-query-div").style.display = "none";
+        }
         
-        queryUser.addEventListener('change', function() {
-            if (queryUser.value === 'customer') {
-                customerQueryDiv.style.display = '';
-                storeQueryDiv.style.display = 'none';
-            } else if (queryUser.value === 'store') {
-                customerQueryDiv.style.display = 'none';
-                storeQueryDiv.style.display = '';
-            } else {
-                customerQueryDiv.style.display = 'none';
-                storeQueryDiv.style.display = 'none';
-            }
-        });
+        function showStoreOptions() {
+            document.getElementById("customer-query-div").style.display = "none";
+            document.getElementById("store-query-div").style.display = "block";
+        }
     </script>
     <!--need to add a dynmaic table for the results-->
     <h2>Query Results</h2>
