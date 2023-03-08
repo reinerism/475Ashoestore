@@ -47,119 +47,28 @@
     </div>
     <form method="post" action="/">
         <div>
-            <button onclick="showCustomerOptions()">Customer</button>
-            <button onclick="showStoreOptions()">Store</button>
-        </div>
-        <!--<div>
-            used for drop down implementing a button
-            <label for="query_user">Select user:</label>
-            <select name="query_user" id="query_user">
-                <option value="customer">Customer</option>
-                <option value="store">Store</option>
-            </select>
-            <button onclick="showCustQuery()">Submit</button>
-        </div> -->
-        
-        <!--<div id="customer-query-div" style="display:none">
-            <label for="customer_query_type">Select customer query type:</label>
-            <select name="customer_query_type" id="customer_query_type"></select>
-                <option value="search">Search</option>
-                <option value="create">Create</option>
-                <option value="delete">Delete</option>
-                <option value="modify">Modify</option>
-            </select>
-            <br>
-            <label for="customer_name">Name:</label>
-            <input type="text" name="customer_name" id="customer_name">
-            <br>
-            <label for="customer_size">Size:</label>
-            <input type="text" name="customer_size" id="customer_size">
-            <br>
-            <label for="customer_price">Price:</label>
-            <input type="text" name="customer_price" id="customer_price">
-            <br>
-            <label for="customer_color">Color:</label>
-            <input type="text" name="customer_color" id="customer_color">
-            <br>
-            <label for="customer_type">Type:</label>
-            <select name="customer_type" id="customer_type">
-                <option value="">--Select Type--</option>
-                <option value="Men">Men</option>
-                <option value="Women">Women</option>
-            </select>
-            <br>
-            <input type="submit" value="Submit Query">
-            <div id="customer-query-details">
+            <h2>Customer Query</h2>
+            <div>
                 <label for="customer_query">Enter customer query:</label>
                 <input type="text" name="customer_query" id="customer_query">
-        </div>-->
-        <div id="customer-query-div" style="display:none">
-            <label for="customer_query_type">Select customer query type:</label>
-            <select name="customer_query_type" id="customer_query_type">
-                <option value="search">Search</option>
-                <option value="create">Create</option>
-                <option value="delete">Delete</option>
-                <option value="modify">Modify</option>
-            </select>
-            <br>
-            <label for="customer_name">Name:</label>
-            <input type="text" name="customer_name" id="customer_name">
-            <br>
-            <label for="customer_size">Size:</label>
-            <input type="text" name="customer_size" id="customer_size">
-            <br>
-            <label for="customer_price">Price:</label>
-            <input type="text" name="customer_price" id="customer_price">
-            <br>
-            <label for="customer_color">Color:</label>
-            <input type="text" name="customer_color" id="customer_color">
-            <br>
-            <label for="customer_type">Type:</label>
-            <select name="customer_type" id="customer_type">
-                <option value="">--Select Type--</option>
-                <option value="Men">Men</option>
-                <option value="Women">Women</option>
-            </select>
-            <br>
-            <button type="button" onclick="submitCustomerQuery()">Submit Query</button>
-        </div>
-        
-        <div id="store-query-div" style="display:none">
-            <label for="store_query">Enter store query:</label>
-            <input type="text" name="store_query" id="store_query">
-            <br>
-            <button type="button" onclick="submitStoreQuery()">Submit Query</button>
+            </div>
+            <div>
+                <input type="submit" value="Submit Customer Query">
+            </div>
         </div>
     </form>
-        <div id="store-query-div" style="display: none;">
-            <label for="store_query">Enter store query:</label>
-            <input type="text" name="store_query" id="store_query">
-        </div>
+    <form method="post" action="/">
         <div>
-            <input type="submit" value="Submit Query">
+            <h2>Store Query</h2>
+            <div>
+                <label for="store_query">Enter store query:</label>
+                <input type="text" name="store_query" id="store_query">
+            </div>
+            <div>
+                <input type="submit" value="Submit Store Query">
+            </div>
         </div>
     </form>
-    
-    <script>
-        function showCustomerOptions() {
-            document.getElementById("customer-query-div").style.display = "block";
-            document.getElementById("store-query-div").style.display = "none";
-        }
-        
-        function showStoreOptions() {
-            document.getElementById("customer-query-div").style.display = "none";
-            document.getElementById("store-query-div").style.display = "block";
-        }
-        function submitCustomerQuery() {
-        // Submit the form data only when the "Submit Query" button is clicked
-        document.getElementById("customer-query-div").getElementsByTagName("form")[0].submit();
-        }
-    
-        function submitStoreQuery() {
-        // Submit the form data only when the "Submit Query" button is clicked
-        document.getElementById("store-query-div").getElementsByTagName("form")[0].submit();
-        }
-    </script>
     <!--need to add a dynmaic table for the results-->
     <h2>Query Results</h2>
     <!-- error handling for invalid query-->
