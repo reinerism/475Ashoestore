@@ -52,7 +52,18 @@
                 <option value="customer">Customer</option>
                 <option value="store">Store</option>
             </select>
+            <button onclick="showCustQuery()">Submit</button>
         </div>
+        <script>
+        function showCustQuery(){
+            var custQueryDiv = document.getElementById("customer-query-div");
+            custQueryDiv.style.display = "block";
+            var queryUser = document.getElementById("quety_user");
+            if (queryUser.value == "customer"){
+            location.reload
+            }
+        }
+        </script>
         <div id="customer-query-div" style="display:none">
             <label for="customer_query_type">Select customer query type:</label>
             <select name="customer_query_type" id="customer_query_type"></select>
