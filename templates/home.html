@@ -33,7 +33,15 @@
     .logo {
         height: 50px;
         margin: 0 10px;
+    }
+    label, select, input {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
     } 
+    select, input[type="number"] {
+        width: 150px;
+    }
 </style>
 </head>
 <body>
@@ -51,7 +59,51 @@
             <input type="hidden" name="query_user" value="customer">
             <div>
                 <label for="customer_query">Enter customer query:</label>
-                <input type="text" name="customer_query" id="customer_query">
+                <!-- <input type="text" name="customer_query" id="customer_query"> Simple query text box-->
+            </div>
+            <div>
+                <label for="style">Style:</label>
+                <select name="style" id="style">
+                    <option value="">--Select Style--</option>
+                    <option value="Sneakers">Sneakers</option>
+                    <option value="Running">Running</option>
+                    <option value="Basketball">Basketball</option>
+                    <!-- add additional options as needed -->
+                </select>
+            
+                <label for="brand">Brand:</label>
+                <select name="brand" id="brand">
+                    <option value="">--Select Brand--</option>
+                    <option value="Nike">Nike</option>
+                    <option value="Adidas">Adidas</option>
+                    <option value="Puma">Puma</option>
+                    <!-- add additional options as needed -->
+                </select>
+            
+                <label for="size">Size:</label>
+                <select name="size" id="size">
+                    <option value="">--Select Size--</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <!-- add additional options as needed -->
+                </select>
+            
+                <label for="gender">M/F:</label>
+                <select name="gender" id="gender">
+                    <option value="">--Select Gender--</option>
+                    <option value="Mens">Men</option>
+                    <option value="Womens">Women</option>
+                    <!-- add additional options as needed -->
+                </select>
+            
+                <label for="price">Max Price:</label>
+                <input type="number" name="price" id="price" placeholder="Enter Max Price" min="0">
             </div>
             <div>
                 <input type="submit" value="Submit Customer Query">
