@@ -90,6 +90,8 @@ def main():
             size = request.form.get('shoe_size')
             gender = request.form.get('shoe_gender')
             max_price = request.form.get('shoe_price') 
+            # Print out the selected values for debugging purposes
+            print(f"style: {style}, brand: {brand}, size: {size}, gender: {gender}, max_price: {max_price}")
              # Construct the SQL query using the selected values
             query = "SELECT SHOES.Shoe_id, SHOES.Name, SHOES.Brand, SHOES.Style, SHOES.Color, SHOE_STORE.Store_id, SHOE_STORE.Store_name \
               FROM SHOES \
@@ -110,6 +112,8 @@ def main():
 
             if max_price is not None:
                 query += f" AND SHOES.Price <= {max_price}"
+            # Print out the constructed SQL query for debugging purposes
+            print(f"SQL query: {query}")
         elif query_user == 'store':
             query = request.form.get('store_query')
         # this block is used to avoid an blank submission to database
