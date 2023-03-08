@@ -78,19 +78,25 @@ def get(cnx, query):
 def main():
     cnx = get_db()
     if request.method == 'POST':
+        query_user = request.form.get('query_user')
         # may want to test request.form.get
         # current implementation raises a "KeyError"
         # if the query field is missing
-        # request.form.get returns 'None'
-        
-        user_query = request.form['query']
+        # request.form.get returns 'None' 
+        if query_user == 'customer':
+            query = request.form.get('customer.query')
+        elif query_user == 'store':
+            query = request.form.get('store_query')
         # this block is used to avoid an blank submission to database
         # avoid internal service error
-        if not user_query:
+        else:
+            cnx.close()
+            return render_template('home.html', error="Invalid query user")
+        if not query:
             cnx.close()
             return redirect(url_for('main'))
         try:
-            col_names, result = get(cnx, user_query)
+            col_names, result = get(cnx, query)
             # need this info to merge the table in the HTML
             # num_col = len(col_names)
     # Return query result as string

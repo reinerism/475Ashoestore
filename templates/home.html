@@ -47,12 +47,24 @@
     </div>
     <form method="post" action="/">
         <div>
-            <label for="query">Enter your query:</label>
-            <input type="text" name="query" id="query">
+            <label for="query_user">Select user:</label>
+            <select name="query_user" id="query_user">
+                <option value="customer">Customer</option>
+                <option value="store">Store</option>
+            </select>
+        </div>
+        <div>
+            <label for="customer_query">Enter customer query:</label>
+            <input type="text" name="customer_query" id="customer_query">
+        </div>
+        <div>
+            <label for="store_query">Enter store query:</label>
+            <input type="text" name="store_query" id="store_query">
         </div>
         <div>
             <input type="submit" value="Submit Query">
         </div>
+    </form>
     <!--need to add a dynmaic table for the results-->
     <h2>Query Results</h2>
     <!-- error handling for invalid query-->
