@@ -86,10 +86,10 @@ def main():
         # request.form.get returns 'None' 
         if query_user == 'customer':
             shoe_name = request.form.get('shoe_name')
-            style = request.form.get('shoe_style')
-            brand = request.form.get('shoe_brand')
-            size = request.form.get('shoe_size')
-            gender = request.form.get('shoe_gender')
+            style = request.form.get('style')
+            brand = request.form.get('brand')
+            size = request.form.get('size')
+            gender = request.form.get('gender')
             max_price = request.form.get('shoe_price') 
           
              # Construct the SQL query using the selected values
@@ -103,7 +103,7 @@ def main():
                 query += f" AND SHOES.Name LIKE '%{shoe_name}%'"
             else:
                 query += " AND 1=1"
-            if style is not None and style != '':
+            if style:
                 query += f" AND SHOES.Style = '{style}'"
             # query if the input is not entered we take everything
             else:
