@@ -102,23 +102,23 @@ def main():
                 query += f" AND SHOES.Style = '{style}'"
             # query if the input is not entered we take everything
             else:
-                query += "AND SHOES.Style LIKE '%'"
+                query += " AND SHOES.Style LIKE '%'"
             if brand:
                 query += f" AND SHOES.Brand = '{brand}'"
             else:
-                query += "AND SHOES.Brand LIKE '%'"
+                query += " AND SHOES.Brand LIKE '%'"
             if size:
                 query += f" AND SHOES.Size = '{size}'"
             else:
-                query += "AND SHOES.Size LIKE '%'"
+                query += " AND SHOES.Size LIKE '%'"
             if gender:
                 query += f" AND SHOES.Gender = '{gender}'"
             else:
-                query += "AND SHOES.Gender LIKE '%'"
+                query += " AND SHOES.Gender LIKE '%'"
             if max_price:
                 query += f" AND SHOES.Price <= {max_price}"
             else:
-                query += "AND SHOES.Price <= '1000000'"
+                query += " AND SHOES.Price <= '1000000'"
             
         elif query_user == 'store':
             query = request.form.get('store_query')
