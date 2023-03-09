@@ -90,30 +90,36 @@ def main():
             size = request.form.get('shoe_size')
             gender = request.form.get('shoe_gender')
             max_price = request.form.get('shoe_price') 
-            # Print out the selected values for debugging purposes
-            print(f"style: {style}, brand: {brand}, size: {size}, gender: {gender}, max_price: {max_price}")
+          
              # Construct the SQL query using the selected values
-            query = "SELECT SHOES.Shoe_id, SHOES.Name, SHOES.Brand, SHOES.Style, SHOES.Color, SHOE_STORE.Store_id, SHOE_STORE.Store_name \
+             #uses 
+            query = "SELECT SHOES.Shoe_id, SHOES.Name, SHOES.Brand, SHOES.Style, SHOES.Color, SHOES.Price, SHOE_STORE.Store_id, SHOE_STORE.Store_name \
               FROM SHOES \
               INNER JOIN INVENTORY ON SHOES.Shoe_id = INVENTORY.Shoe_id \
               INNER JOIN SHOE_STORE ON INVENTORY.Store_id = SHOE_STORE.Store_id \
               WHERE 1=1"
-            if style is not None:
+            if style:
                 query += f" AND SHOES.Style = '{style}'"
-
-            if brand is not None:
+            # query if the input is not entered we take everything
+            else:
+                query += "AND SHOES.Style LIKE '%'"
+            if brand:
                 query += f" AND SHOES.Brand = '{brand}'"
-
-            if size is not None:
+            else:
+                query += "AND SHOES.Brand LIKE '%'"
+            if size:
                 query += f" AND SHOES.Size = '{size}'"
-
-            if gender is not None:
+            else:
+                query += "AND SHOES.Size LIKE '%'"
+            if gender:
                 query += f" AND SHOES.Gender = '{gender}'"
-
-            if max_price is not None:
+            else:
+                query += "AND SHOES.Gender LIKE '%'"
+            if max_price:
                 query += f" AND SHOES.Price <= {max_price}"
-            # Print out the constructed SQL query for debugging purposes
-            print(f"SQL query: {query}")
+            else:
+                query += "AND SHOES.Price <= '1000000'"
+            
         elif query_user == 'store':
             query = request.form.get('store_query')
         # this block is used to avoid an blank submission to database
