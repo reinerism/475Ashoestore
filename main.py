@@ -85,6 +85,7 @@ def main():
         # if the query field is missing
         # request.form.get returns 'None' 
         if query_user == 'customer':
+            shoe_name = request.form.get('shoe_name')
             style = request.form.get('shoe_style')
             brand = request.form.get('shoe_brand')
             size = request.form.get('shoe_size')
@@ -93,11 +94,15 @@ def main():
           
              # Construct the SQL query using the selected values
              #uses 
-            query = "SELECT SHOES.Shoe_id, SHOES.Name, SHOES.Brand, SHOES.Style, SHOES.Color, SHOES.Price, SHOES.Gender, SHOE_STORE.Store_id, SHOE_STORE.Store_name \
+            query = "SELECT SHOES.Shoe_id, SHOE.Name, SHOES.Brand, SHOE.Size, SHOES.Style, SHOES.Color, SHOES.Price, SHOES.Gender, SHOE_STORE.Store_id, SHOE_STORE.Store_name \
               FROM SHOES \
               INNER JOIN INVENTORY ON SHOES.Shoe_id = INVENTORY.Shoe_id \
               INNER JOIN SHOE_STORE ON INVENTORY.Store_id = SHOE_STORE.Store_id \
               WHERE 1=1"
+            if shoe_name:
+                query += f" AND SHOES.Name LIKE '%{shoe_name}%'"
+            else:
+                query += " AND 1=1"
             if style:
                 query += f" AND SHOES.Style = '{style}'"
             # query if the input is not entered we take everything
@@ -118,8 +123,7 @@ def main():
             if max_price:
                 query += f" AND SHOES.Price <= {max_price}"
             else:
-                query += " AND SHOES.Price <= '1000000'"
-            
+                query += " AND SHOES.Price <= '1000000'"    
         elif query_user == 'store':
             query = request.form.get('store_query')
         # this block is used to avoid an blank submission to database
