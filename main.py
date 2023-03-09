@@ -93,7 +93,7 @@ def main():
           
              # Construct the SQL query using the selected values
              #uses 
-            query = "SELECT SHOES.Shoe_id, SHOES.Name, SHOES.Brand, SHOES.Style, SHOES.Color, SHOES.Price, SHOE_STORE.Store_id, SHOE_STORE.Store_name \
+            query = "SELECT SHOES.Shoe_id, SHOES.Name, SHOES.Brand, SHOES.Style, SHOES.Color, SHOES.Price, SHOES.Gender, SHOE_STORE.Store_id, SHOE_STORE.Store_name \
               FROM SHOES \
               INNER JOIN INVENTORY ON SHOES.Shoe_id = INVENTORY.Shoe_id \
               INNER JOIN SHOE_STORE ON INVENTORY.Store_id = SHOE_STORE.Store_id \
