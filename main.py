@@ -94,7 +94,7 @@ def main():
           
              # Construct the SQL query using the selected values
              #uses 
-            query = "SELECT SHOES.Shoe_id, SHOES.Name, SHOES.Brand, SHOES.Size, SHOES.Style, SHOES.Color, SHOES.Price, SHOES.Gender, SHOE_STORE.Store_id, SHOE_STORE.Store_name \
+            query = "SELECT SHOES.Shoe_id, SHOES.Name, SHOES.Brand, SHOES.Size, SHOES.Style, SHOES.Color, SHOES.Price, SHOES.Gender, SHOE_STORE.Store_name \
               FROM SHOES \
               INNER JOIN INVENTORY ON SHOES.Shoe_id = INVENTORY.Shoe_id \
               INNER JOIN SHOE_STORE ON INVENTORY.Store_id = SHOE_STORE.Store_id \
@@ -103,11 +103,11 @@ def main():
                 query += f" AND SHOES.Name LIKE '%{shoe_name}%'"
             else:
                 query += " AND 1=1"
-            if style:
+            if style is not None and style != '':
                 query += f" AND SHOES.Style = '{style}'"
             # query if the input is not entered we take everything
             else:
-                query += " AND SHOES.Style LIKE '%'"
+                query += " AND 1=1"
             if brand:
                 query += f" AND SHOES.Brand = '{brand}'"
             else:
