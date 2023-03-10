@@ -129,7 +129,7 @@ def main():
             ship_state = request.form.get('state')
             from_date = request.form.get('from_date')
             to_date = request.form.get('to_date')
-            query = "SHOE_STORE.Store_name, ORDERS.Shipping_info, COUNT(DISTINCT SHOES.Name) as num_shoe_types \
+            query = "SELECT SHOE_STORE.Store_name, ORDERS.Shipping_info, COUNT(DISTINCT SHOES.Name) as number of shoe types \
                 FROM ORDERS \
                 INNER JOIN SHOE_STORE ON ORDERS.Store_id = SHOE_STORE.Store_id \
                 INNER JOIN SHOES ON FIND_IN_SET(SHOES.Shoe_id, ORDERS.Items_ordered) \
