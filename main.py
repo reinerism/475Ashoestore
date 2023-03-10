@@ -127,8 +127,9 @@ def main():
         # if the store query is used demonstrating more functionality   
         elif query_user == 'store':
             #grabbing input from HTML
-            store_id = request.form.get('store_name')
+            store_name = request.form.get('store_name')
             ship_state = request.form.get('state')
+            order_status =request.form.get('order_status')
             from_date = request.form.get('from_date')
             to_date = request.form.get('to_date')
             # creating the interesting query
@@ -136,8 +137,13 @@ def main():
                 FROM ORDERS \
                 INNER JOIN SHOE_STORE ON ORDERS.Store_id = SHOE_STORE.Store_id \
                 WHERE 1 = 1 "
-            if store_id:
-                query += f" AND SHOE_STORE.Store_id = '{store_id}'"
+            if store_name:
+                query += f" AND SHOE_STORE.Store_name = '{store_name}'"
+            else:
+                query += " AND 1=1"
+
+            if order_status:
+                query += f" AND ORDER.Order_status = '{order_status}'"
             else:
                 query += " AND 1=1"
             """if ship_state:
