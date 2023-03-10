@@ -71,6 +71,7 @@
                     <option value="Sneakers">Sneakers</option>
                     <option value="Running">Running</option>
                     <option value="Basketball">Basketball</option>
+                    <option value="Athletic">Basketball</option>
                 </select>
             
                 <label for="brand">Brand:</label>
@@ -79,6 +80,7 @@
                     <option value="Nike">Nike</option>
                     <option value="Adidas">Adidas</option>
                     <option value="Puma">Puma</option>
+                    <option value="Reebok">Puma</option>
                 </select>
             
                 <label for="size">Size:</label>
@@ -115,7 +117,27 @@
             <input type="hidden" name="query_user" value="store">
             <div>
                 <label for="store_query">Enter store query:</label>
-                <input type="text" name="store_query" id="store_query">
+                <!--<input type="text" name="store_query" id="store_query">-->
+            </div>
+            <div>
+                <!--added drop down table for the stores used ID as value for store names-->
+                <label for="store_name">Style:</label>
+                <select name="store_name" id="store_name">
+                    <option value="">--Select Store--</option>
+                    <option value="129723868">Banana Shoes</option>
+                    <option value="294725826">Blueberry Shoes</option>
+                    <option value="456384876">Pineapple Shoes</option>
+                    <option value="974324876">Oranges Shoes</option>
+                </select>
+                <!--added a state input so you can pick which state items were shipped-->
+                <label for="state">State:</label>
+                <input type="text" name="ship_state" id="ship_state" placeholder="Enter State">
+                <!--added a date range to check for orders within a specific date-->
+                <label for="from_date">From:</label>
+                <input type="date" name="from_date" id="from_date">
+
+                <label for="to_date">To:</label>
+                <input type="date" name="to_date" id="to_date">
             </div>
             <div>
                 <input type="submit" value="Submit Store Query">

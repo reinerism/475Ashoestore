@@ -125,7 +125,28 @@ def main():
             else:
                 query += " AND SHOES.Price <= '1000000'"    
         elif query_user == 'store':
-            query = request.form.get('store_query')
+            store_id = request.form.get('store_name')
+            ship_state = request.form.get('state')
+            from_date = request.form.get('from_date')
+            to_date = request.form.get('to_date')
+            query = "SHOE_STORE.Store_name, ORDERS.Shipping_info, COUNT(DISTINCT SHOES.Name) as num_shoe_types \
+                FROM ORDERS \
+                INNER JOIN SHOE_STORE ON ORDERS.Store_id = SHOE_STORE.Store_id \
+                INNER JOIN SHOES ON FIND_IN_SET(SHOES.Shoe_id, ORDERS.Items_ordered) \
+                WHERE 1 = 1 \
+                GROUP BY SHOE_STORE.Store_name"
+            if store_id:
+                query += f" AND SHOE_STORE.Store_id = '{store_id}'"
+            else:
+                query += " AND 1=1"
+            if ship_state:
+                query += f" AND SHOE_STORE.Shipping_info LIKE '%{ship_state}%'"
+            else:
+                query += " AND 1=1"
+            if from_date:
+                query += f" AND ORDERS.Order_date BETWEEN '{from_date}' AND '{to_date}'"
+            else:
+                query += " AND 1=1"
         # this block is used to avoid an blank submission to database
         # avoid internal service error
         else:
