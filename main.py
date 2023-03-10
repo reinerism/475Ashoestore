@@ -165,7 +165,7 @@ def main():
             #error handling to avoid users from creating,dropping, or altering tables!
             if 'create' in query.lower() or 'drop' in query.lower() or 'alter' in query.lower():
                 return """You been put in a time out for trying to do bad things to my database!
-                If you Promise to be nice just hit the back arrow in your browser
+                If you Promise to be nice just hit the 'backarrow' in your browser
                 And Please funny business or get sent back here"""
         else:
             cnx.close()
