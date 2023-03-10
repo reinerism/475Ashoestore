@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Team Pineapple's Shoe Store Database</title>
+<!--script function for the admin user box-->
 <script>
     function submitQuery() {
         // Get the admin query text box element
@@ -12,6 +13,7 @@
     document.forms[0].submit();
     }
 </script>
+<!--styles for the tables, td, th, header, inputs, logo and selects-->
 <style>
     table {
         border-collapse: collapse;
@@ -161,15 +163,18 @@
             </div>
         </div>
     </form>
+    <!--Added a section where you could enter MQSQL queries-->
     <form method="post" action="/">
         <div>
             <h2>Admin Query</h2>
             <input type="hidden" name="query_user" value="admin">
             <div>
-                <label for="admin_query">Enter Admin query:</label>
+                <label for="admin_query">Enter Admin query:</label><br>
+                <!--text area box that allows users to expand the box-->
                 <textarea name="admin_query" id="admin_query" rows="4"></textarea>
             </div>
             <div>
+                <!--required a JS function that allowed users to hit enter in the box without submitting-->
                 <input type="submit" value="Submit Admin Query" onclick="submitQuery();">
             </div>
         </div>
