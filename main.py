@@ -133,7 +133,7 @@ def main():
             from_date = request.form.get('from_date')
             to_date = request.form.get('to_date')
             # creating the interesting query
-            query = "SELECT COUNT(*) AS number of orders, SUM(Total_cost) AS total $$ \
+            query = "SELECT COUNT(*) AS 'number of orders', SUM(Total_cost) AS 'total $$' \
                 FROM ORDERS \
                 INNER JOIN SHOE_STORE ON ORDERS.Store_id = SHOE_STORE.Store_id \
                 WHERE 1 = 1 "
