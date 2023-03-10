@@ -160,6 +160,8 @@ def main():
                 query += " AND 1=1"
         # this block is used to avoid an blank submission to database
         # avoid internal service error
+        elif query_user == 'admin':
+            query = request.form.get('admin_query')
         else:
             cnx.close()
             return render_template('home.html', error="Invalid query user")

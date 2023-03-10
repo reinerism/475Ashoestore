@@ -2,6 +2,16 @@
 <html>
 <head>
     <title>Team Pineapple's Shoe Store Database</title>
+<script>
+    function submitQuery() {
+        // Get the admin query text box element
+    var queryBox = document.getElementById("admin_query");
+        // Replace "Enter" key press with new line character
+    queryBox.value = queryBox.value.replace(/\r?\n/g, "\n");
+        // Submit the form
+    document.forms[0].submit();
+    }
+</script>
 <style>
     table {
         border-collapse: collapse;
@@ -148,6 +158,19 @@
             </div>
             <div>
                 <input type="submit" value="Submit Store Query">
+            </div>
+        </div>
+    </form>
+    <form method="post" action="/">
+        <div>
+            <h2>Admin Query</h2>
+            <input type="hidden" name="query_user" value="admin">
+            <div>
+                <label for="admin_query">Enter Admin query:</label>
+                <textarea name="admin_query" id="admin_query" rows="4"></textarea>
+            </div>
+            <div>
+                <input type="submit" value="Submit Admin Query" onclick="submitQuery();">
             </div>
         </div>
     </form>
