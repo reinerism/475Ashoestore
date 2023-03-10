@@ -162,6 +162,9 @@ def main():
         # avoid internal service error
         elif query_user == 'admin':
             query = request.form.get('admin_query')
+            #error handling to avoid users from creating,dropping, or altering tables!
+            if 'create' in query.lower() or 'drop' in query.lower() or 'alter' in query.lower():
+                return 'Are you trying to mess with my database... get outta here'
         else:
             cnx.close()
             return render_template('home.html', error="Invalid query user")
