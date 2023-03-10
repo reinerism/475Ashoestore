@@ -164,7 +164,9 @@ def main():
             query = request.form.get('admin_query')
             #error handling to avoid users from creating,dropping, or altering tables!
             if 'create' in query.lower() or 'drop' in query.lower() or 'alter' in query.lower():
-                return 'Are you trying to mess with my database... get outta here'
+                return """You been put in a time out for trying to do bad things to my database!
+                If you Promise to be nice just hit the back arrow in your browser
+                And Please funny business or get sent back here"""
         else:
             cnx.close()
             return render_template('home.html', error="Invalid query user")
