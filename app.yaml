@@ -1,9 +1,16 @@
 # [START gae_python39_cloudsql_config]
 runtime: python39
 
+# migration to a new cloud sql name 
+"""env_variables:
+  CLOUD_SQL_USERNAME: mastershoe
+  CLOUD_SQL_PASSWORD: shoe
+  CLOUD_SQL_DATABASE_NAME: shoestore
+  CLOUD_SQL_CONNECTION_NAME: shoestore-378821:us-west1:shoestore"""
+
 env_variables:
   CLOUD_SQL_USERNAME: mastershoe
   CLOUD_SQL_PASSWORD: shoe
   CLOUD_SQL_DATABASE_NAME: shoestore
-  CLOUD_SQL_CONNECTION_NAME: shoestore-378821:us-west1:shoestore
+  CLOUD_SQL_CONNECTION_NAME: shoestore-380118:us-west1:shoestore
 # [END gae_python39_cloudsql_config]
