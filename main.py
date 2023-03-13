@@ -122,8 +122,10 @@ def main():
                 query += " AND SHOES.Gender LIKE '%'"
             if max_price:
                 query += f" AND SHOES.Price <= {max_price}"
+                query += " ORDER BY SHOES.price DESC"
             else:
                 query += " AND SHOES.Price <= '1000000'" 
+                query += " ORDER BY SHOES.price DESC"
         # if the store query is used demonstrating more functionality   
         elif query_user == 'store':
             #grabbing input from HTML
