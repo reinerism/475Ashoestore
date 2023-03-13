@@ -13,6 +13,23 @@
     document.forms[0].submit();
     }
 </script>
+<!--script to reformat date based on MYSQL-->
+<script>
+    // Get the HTML date input element by ID
+    var fromDateInput = document.getElementById("from_date");
+    
+    // Get the value of the input element
+    var fromDateValue = fromDateInput.value;
+    
+    // Split the value into separate month, day, and year components
+    var dateComponents = fromDateValue.split("-");
+    
+    // Reformat the date value as "YYYY-MM-DD"
+    var reformattedDate = dateComponents[2] + "-" + dateComponents[1] + "-" + dateComponents[0];
+    
+    // Set the reformatted date value back into the input element
+    fromDateInput.value = reformattedDate;
+    </script>
 <!--styles for the tables, td, th, header, inputs, logo and selects-->
 <style>
     table {
