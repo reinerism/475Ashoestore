@@ -175,10 +175,10 @@
                 <input type="text" name="ship_state" id="ship_state" placeholder="Enter State">
                 <!--added a date range to check for orders within a specific date-->
                 <label for="from_date">From:</label>
-                <input type="date" name="from_date" id="from_date">
+                <input type="date" name="from_date" id="from_date" onchange="convertDateFormat()">
 
                 <label for="to_date">To:</label>
-                <input type="date" name="to_date" id="to_date">
+                <input type="date" name="to_date" id="to_date" onchange="convertDateFormat()">
             </div>
             <div>
                 <input type="submit" value="Submit Store Query">
