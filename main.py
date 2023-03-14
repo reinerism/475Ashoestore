@@ -94,7 +94,7 @@ def main():
           
              # Construct the SQL query using the selected values
              #uses 
-            query = "SELECT SHOES.Shoe_id, SHOES.Name, SHOES.Brand, SHOES.Size, SHOES.Style, SHOES.Color, SHOES.Price, SHOES.Gender, SHOE_STORE.Store_name \
+            query = "SELECT SHOES.Shoe_id, SHOES.Name, SHOES.Brand, SHOES.Size, SHOES.Style, SHOES.Color, SHOES.Price, SHOES.Gender, SHOE_STORE.Store_name, INVENTORY.Quantity  \
               FROM SHOES \
               INNER JOIN INVENTORY ON SHOES.Shoe_id = INVENTORY.Shoe_id \
               INNER JOIN SHOE_STORE ON INVENTORY.Store_id = SHOE_STORE.Store_id \
@@ -158,9 +158,10 @@ def main():
             else:
                 query += " AND 1=1"
             if to_date:
-                query += f" AND ORDERS.Order_date <= '{to_date}"
+                query += f" AND ORDERS.Order_date <= '{to_date}'"
             else:
                 query += " AND 1=1"
+            query += " GROUP BY CUSTOMER.First_name, CUSTOMER.Last_name, CUST_ADDR.Cust_addr_state, ORDERS.Order_status"
         # this block is used to avoid an blank submission to database
         # avoid internal service error
         elif query_user == 'admin':
