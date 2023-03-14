@@ -1,3 +1,6 @@
+#Author: Reiner Opitz
+#03/13/2023
+#this is an autoscripting code for the shoe store database 
 import random
 from faker import Faker
 
