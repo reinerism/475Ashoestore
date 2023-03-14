@@ -135,7 +135,7 @@ def main():
             from_date = request.form.get('from_date')
             to_date = request.form.get('to_date')
             # creating the interesting query
-            query = "SELECT COUNT(*) AS 'number of orders', SUM(Total_cost) AS 'total $$', CUSTOMER.First_name, CUSTOMER.Last_name, CUST_ADDR.Cust_addr_state, ORDERS.Order_status \
+            query = "SELECT CUSTOMER.Customer_id, CUSTOMER.Last_name, CUST_ADDR.Cust_addr_state, ORDERS.Order_status,SUM(ORDERS.Total_cost) AS 'total amount of order', ORDERS.Order_date \
                 FROM ORDERS \
                 INNER JOIN SHOE_STORE ON ORDERS.Store_id = SHOE_STORE.Store_id \
                 INNER JOIN CUSTOMER ON ORDERS.Customer_id = CUSTOMER.Customer_id \
@@ -150,7 +150,7 @@ def main():
             else:
                 query += " AND 1=1"
             if ship_state:
-                query += f" AND SHOE_STORE.Shipping_info LIKE '%{ship_state}%'"
+                query += f" AND CUST_ADDR.Cust_addr_state LIKE '%{ship_state}%'"
             else:
                 query += " AND 1=1"
             if from_date:
@@ -161,7 +161,7 @@ def main():
                 query += f" AND ORDERS.Order_date <= '{to_date}'"
             else:
                 query += " AND 1=1"
-            query += " GROUP BY CUSTOMER.First_name, CUSTOMER.Last_name, CUST_ADDR.Cust_addr_state, ORDERS.Order_status"
+            query += " GROUP BY CUSTOMER.Customer_id, CUSTOMER.Last_name, CUST_ADDR.Cust_addr_state, ORDERS.Order_status, ORDERS.Order_date;"
         # this block is used to avoid an blank submission to database
         # avoid internal service error
         elif query_user == 'admin':
