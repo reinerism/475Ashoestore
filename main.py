@@ -146,7 +146,7 @@ def main():
             else:
                 query += " AND 1=1"
             if order_status:
-                query += f" AND ORDER.Order_status = '{order_status}'"
+                query += f" AND ORDERS.Order_status = '{order_status}'"
             else:
                 query += " AND 1=1"
             if ship_state:
