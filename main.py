@@ -135,23 +135,24 @@ def main():
             from_date = request.form.get('from_date')
             to_date = request.form.get('to_date')
             # creating the interesting query
-            query = "SELECT COUNT(*) AS 'number of orders', SUM(Total_cost) AS 'total $$' \
+            query = "SELECT COUNT(*) AS 'number of orders', SUM(Total_cost) AS 'total $$', Customer.Customer_name, CUST_ADDR.Cust_addr_state, ORDERS.Order_status \
                 FROM ORDERS \
                 INNER JOIN SHOE_STORE ON ORDERS.Store_id = SHOE_STORE.Store_id \
+                INNER JOIN CUSTOMER ON ORDERS.Customer_id = CUSTOMER.Customer_id \
+                INNER JOIN CUST_ADDR ON CUSTOMER.Customer_id = CUST_ADDR.Customer_id \
                 WHERE 1 = 1 "
             if store_name:
                 query += f" AND SHOE_STORE.Store_name = '{store_name}'"
             else:
                 query += " AND 1=1"
-
             if order_status:
                 query += f" AND ORDER.Order_status = '{order_status}'"
             else:
                 query += " AND 1=1"
-            """if ship_state:
+            if ship_state:
                 query += f" AND SHOE_STORE.Shipping_info LIKE '%{ship_state}%'"
             else:
-                query += " AND 1=1"""
+                query += " AND 1=1"
             if from_date:
                 query += f" AND ORDERS.Order_date >= '{from_date}'"
             else:
